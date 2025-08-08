@@ -34,6 +34,14 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
+    private void LateUpdate()
+    {
+        if (canLook)
+        {
+            CameraLook();
+        }
+    }
+
     // ========================플레이어 이동============================
 
     public void OnMoveInput(InputAction.CallbackContext context) // 이동 신호 입력
@@ -90,5 +98,17 @@ public class PlayerController : MonoBehaviour
 
     // ========================플레이어 시야============================
 
-    public void OnLookInput(Inpu)
+    public void OnLookInput(InputAction.CallbackContext context) // 시야 신호 입력
+    {
+        mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    void CameraLook() // 카메라 움직임
+    {
+        camCurXRot += mouseDelta.y * lookSensitivity;
+        camCurXRot = Mathf.Clamp(camCurXRot, mixXLook, maxXLook); // 시야각 범위 제한
+        cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
+
+        transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
+    }
 }
