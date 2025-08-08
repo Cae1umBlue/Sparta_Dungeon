@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public float jumpPower;
     public LayerMask groundLayerMask;
 
-    [Header("Look")]
+    [Header("Look")] // 시야
     public Transform cameraContainer;
     public float mixXLook;
     public float maxXLook;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     // ========================플레이어 이동============================
 
-    public void OnMoveInput(InputAction.CallbackContext context) 
+    public void OnMoveInput(InputAction.CallbackContext context) // 이동 신호 입력
     {
         if(context.phase == InputActionPhase.Performed)
         {
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Move()
+    public void Move() // 이동
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
 
     // ========================플레이어 점프============================
 
-    public void OnJumpInput(InputAction.CallbackContext context)
+    public void OnJumpInput(InputAction.CallbackContext context) // 점프 신호 입력
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
@@ -90,4 +90,5 @@ public class PlayerController : MonoBehaviour
 
     // ========================플레이어 시야============================
 
+    public void OnLookInput(Inpu)
 }
