@@ -23,4 +23,9 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
 }
