@@ -60,6 +60,31 @@ public class PlayerController : MonoBehaviour
     // ========================플레이어 점프============================
 
     public void OnJumpInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && IsGrounded())
+        {
+            rb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+        }    
+    }
 
+    bool IsGrounded() // 플레이어가 땅에 붙어있는지 여부 체크
+    {
+        Ray[] rays = new Ray[4]
+        {
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f),Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f),Vector3.down),
+            new Ray(transform.position + (transform.forward * 0.2f) + (transform.up * 0.01f),Vector3.down),
+            new Ray(transform.position + (-transform.forward * 0.2f) + (transform.up * 0.01f),Vector3.down),
+        };
 
+        for(int i = 0; i < rays.Length; i++)
+        {
+            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
