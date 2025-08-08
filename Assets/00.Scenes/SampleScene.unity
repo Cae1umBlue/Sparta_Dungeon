@@ -134,11 +134,11 @@ GameObject:
   - component: {fileID: 122490219}
   - component: {fileID: 122490218}
   - component: {fileID: 122490217}
+  - component: {fileID: 122490220}
   - component: {fileID: 122490223}
   - component: {fileID: 122490222}
   - component: {fileID: 122490221}
-  - component: {fileID: 122490220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,6 +244,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 2635cba6-fc2c-4b0a-b3bd-44fdb26dcd06
     m_ActionName: Player/Junp[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cfea43e0-7947-4133-a20a-e61770cafac2
+    m_ActionName: Player/Look[/Mouse/delta]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -273,6 +277,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d36f80c50cfd14468962dc4624e1f86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpPower: 80
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  cameraContainer: {fileID: 2070948738}
+  mixXLook: -85
+  maxXLook: 85
+  lookSensitivity: 0.2
+  canLook: 1
 --- !u!114 &122490223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,7 +405,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -538,7 +552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2070948738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
