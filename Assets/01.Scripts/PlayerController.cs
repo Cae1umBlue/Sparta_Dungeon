@@ -5,13 +5,13 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")] // ÀÌµ¿ ¹× Á¡ÇÁ
+    [Header("Movement")] // ì´ë™ ë° ì í”„
     public float moveSpeed;
     private Vector2 curMovementInput;
     public float jumpPower;
     public LayerMask groundLayerMask;
 
-    [Header("Look")] // ½Ã¾ß
+    [Header("Look")] // ì‹œì•¼
     public Transform cameraContainer;
     public float mixXLook;
     public float maxXLook;
@@ -42,9 +42,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ========================ÇÃ·¹ÀÌ¾î ÀÌµ¿============================
+    // ========================í”Œë ˆì´ì–´ ì´ë™============================
 
-    public void OnMoveInput(InputAction.CallbackContext context) // ÀÌµ¿ ½ÅÈ£ ÀÔ·Â
+    public void OnMoveInput(InputAction.CallbackContext context) // ì´ë™ ì‹ í˜¸ ì…ë ¥
     {
         if(context.phase == InputActionPhase.Performed)
         {
@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Move() // ÀÌµ¿
+    public void Move() // ì´ë™
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
         dir *= moveSpeed;
@@ -65,9 +65,9 @@ public class PlayerController : MonoBehaviour
         rb.velocity = dir;
     }
 
-    // ========================ÇÃ·¹ÀÌ¾î Á¡ÇÁ============================
+    // ========================í”Œë ˆì´ì–´ ì í”„============================
 
-    public void OnJumpInput(InputAction.CallbackContext context) // Á¡ÇÁ ½ÅÈ£ ÀÔ·Â
+    public void OnJumpInput(InputAction.CallbackContext context) // ì í”„ ì‹ í˜¸ ì…ë ¥
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         }    
     }
 
-    bool IsGrounded() // ÇÃ·¹ÀÌ¾î°¡ ¶¥¿¡ ºÙ¾îÀÖ´ÂÁö ¿©ºÎ Ã¼Å©
+    bool IsGrounded() // í”Œë ˆì´ì–´ê°€ ë•…ì— ë¶™ì–´ìˆëŠ”ì§€ ì—¬ë¶€ ì²´í¬
     {
         Ray[] rays = new Ray[4]
         {
@@ -96,17 +96,17 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
-    // ========================ÇÃ·¹ÀÌ¾î ½Ã¾ß============================
+    // ========================í”Œë ˆì´ì–´ ì‹œì•¼============================
 
-    public void OnLookInput(InputAction.CallbackContext context) // ½Ã¾ß ½ÅÈ£ ÀÔ·Â
+    public void OnLookInput(InputAction.CallbackContext context) // ì‹œì•¼ ì‹ í˜¸ ì…ë ¥
     {
         mouseDelta = context.ReadValue<Vector2>();
     }
 
-    void CameraLook() // Ä«¸Ş¶ó ¿òÁ÷ÀÓ
+    void CameraLook() // ì¹´ë©”ë¼ ì›€ì§ì„
     {
         camCurXRot += mouseDelta.y * lookSensitivity;
-        camCurXRot = Mathf.Clamp(camCurXRot, mixXLook, maxXLook); // ½Ã¾ß°¢ ¹üÀ§ Á¦ÇÑ
+        camCurXRot = Mathf.Clamp(camCurXRot, mixXLook, maxXLook); // ì‹œì•¼ê° ë²”ìœ„ ì œí•œ
         cameraContainer.localEulerAngles = new Vector3(-camCurXRot, 0, 0);
 
         transform.eulerAngles += new Vector3(0, mouseDelta.x * lookSensitivity, 0);
