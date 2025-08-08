@@ -21,6 +21,16 @@ public class Condition : MonoBehaviour
         uiBar.fillAmount = GetPercentage();
     }
 
+    public void Add(float amount) // 둘 중 작은 값
+    {
+        curValue = Mathf.Min(curValue + amount, maxValue);
+    }
+
+    public void Subtract(float amount) // 둘 중 큰 값
+    {
+        curValue = Mathf.Max(curValue - amount, 0.0f);
+    }
+
     public float GetPercentage() // 체력 퍼센트 반환(0-1 사이의 값)
     {
         return curValue / maxValue;
