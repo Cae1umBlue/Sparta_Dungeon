@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
+    [Header("Movement")] // 이동 및 점프
     public float moveSpeed;
     private Vector2 curMovementInput;
     public float jumpPower;
@@ -87,4 +87,7 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
+
+    // ========================플레이어 시야============================
+
 }
