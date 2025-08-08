@@ -10,11 +10,11 @@ public interface IDamagable
 
 public class PlayerCondition : MonoBehaviour, IDamagable
 {
-    public UICondition uICondition;
+    public UICondition uiCondition;
 
-    Condition health { get { return uICondition.health; } }
-    //Condition hunger { get { return uICondition.hunger; } }
-    //Condition stamina { get { return uICondition.Stamina; } }
+    Condition health { get { return uiCondition.health; } }
+    //Condition hunger { get { return uiCondition.hunger; } }
+    //Condition stamina { get { return uiCondition.Stamina; } }
 
     //public float nohungerHealthDecay;
     public event Action onTakeDamage;
