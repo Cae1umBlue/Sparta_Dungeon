@@ -34,7 +34,9 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    public void OnMoveInput(InputAction.CallbackContext context)
+    // ========================플레이어 이동============================
+
+    public void OnMoveInput(InputAction.CallbackContext context) 
     {
         if(context.phase == InputActionPhase.Performed)
         {
@@ -48,6 +50,16 @@ public class PlayerController : MonoBehaviour
 
     public void Move()
     {
-        //리지드바디 사용
+        Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
+        dir *= moveSpeed;
+        dir.y = rb.velocity.y;
+
+        rb.velocity = dir;
     }
+
+    // ========================플레이어 점프============================
+
+    public void OnJumpInput(InputAction.CallbackContext context)
+
+
 }
