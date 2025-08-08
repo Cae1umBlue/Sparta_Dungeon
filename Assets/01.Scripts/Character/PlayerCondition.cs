@@ -13,4 +13,22 @@ public class PlayerCondition : MonoBehaviour
 
     //public float nohungerHealthDecay;
     public event Action onTakeDamage;
+
+    private void Update()
+    {
+        if(health.curValue <= 0f) // 체력 0 이하 사망
+        {
+            Die();
+        }
+    }
+
+    public void Heal(float amount) // 체력 회복
+    {
+        health.Add(amount);
+    }
+
+    void Die() // 사망
+    {
+        Debug.Log("You Die");
+    }
 }
