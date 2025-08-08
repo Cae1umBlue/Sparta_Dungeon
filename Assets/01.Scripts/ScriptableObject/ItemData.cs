@@ -37,5 +37,5 @@ public class ItemData : ScriptableObject
     public int maxStackAmount; // 최대 소지 가능 갯수
 
     [Header("Consumable")]
-    public ItemDataConsumable[] consumables;
+    public ItemDataConsumable[] consumables; // 소비 아이템 목록
 }
