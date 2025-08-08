@@ -6,7 +6,8 @@ public class CharacterManager : MonoBehaviour
 {
     private static CharacterManager _instance;
     public static CharacterManager Instance
-    { get
+    { 
+        get
         {
             if (_instance == null)
             {
@@ -15,6 +16,14 @@ public class CharacterManager : MonoBehaviour
             return _instance;
         }
     }    
+
+    public Player Player
+    {
+        get { return _player; }
+        set { _player = value; }
+    }
+
+    private Player _player;
 
     private void Awake()
     {
