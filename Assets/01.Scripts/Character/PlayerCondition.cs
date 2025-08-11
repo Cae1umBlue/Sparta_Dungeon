@@ -13,10 +13,8 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public UICondition uiCondition;
 
     Condition health { get { return uiCondition.health; } }
-    //Condition hunger { get { return uiCondition.hunger; } }
-    Condition stamina { get { return uiCondition.Stamina; } }
+    Condition stamina { get { return uiCondition.Stamina; } } // 스테미나 소비 및 회복 기능 추가 예정
 
-    //public float nohungerHealthDecay;
     public event Action onTakeDamage;
 
     private void Update()

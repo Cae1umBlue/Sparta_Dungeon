@@ -63,7 +63,7 @@ public class UIInventory : MonoBehaviour
         dropButton.SetActive(false);
     }
 
-    void Toggle()
+    void Toggle() // 인벤토리 창 on/off
     {
         if (IsOpen())
         {
@@ -75,12 +75,12 @@ public class UIInventory : MonoBehaviour
         }
     }
 
-    bool IsOpen()
+    bool IsOpen() // 인벤토리창 ON/OFF 체크
     {
         return inventoryWindow.activeInHierarchy;
     }
 
-    void AddItem()
+    void AddItem() // 아이템 추가
     {
         ItemData data = CharacterManager.Instance.Player.itemData;
 
