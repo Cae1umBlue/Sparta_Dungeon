@@ -21,7 +21,7 @@ public class UIInventory : MonoBehaviour
     public TextMeshProUGUI selectedItemStatName;
     public TextMeshProUGUI selectedItemStatvalue;
     public GameObject useButton;
-    public GameObject DropButton;
+    public GameObject dropButton;
 
     private int curEqiuipIndex;
 
@@ -53,7 +53,15 @@ public class UIInventory : MonoBehaviour
 
     void ClearSelectedItemWindows()
     {
+        selectedItem = null;
 
+        selectedItemName.text = string.Empty;
+        selectedItemDescription.text  = string.Empty;
+        selectedItemStatName.text = string.Empty;
+        selectedItemStatvalue.text = string.Empty;
+
+        useButton.SetActive(false);
+        dropButton.SetActive(false);
     }
 
     void Toggle()
