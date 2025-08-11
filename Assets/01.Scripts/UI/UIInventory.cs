@@ -197,4 +197,16 @@ public class UIInventory : MonoBehaviour
         }
     }
 
+    void RemoveSelectedItem() // 선택 또는 사용한 아이템 제거
+    {
+        selectedItem.quantity--;
+
+        if(selectedItem.quantity <= 0)
+        {
+            selectedItem = null;
+            slots[selectedItemIndex].item = null;
+            selectedItemIndex = -1;
+            ClearSelectedItemWindows();
+        }
+    }
 }
