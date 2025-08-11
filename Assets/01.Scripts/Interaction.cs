@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Interaction : MonoBehaviour
@@ -11,4 +12,12 @@ public class Interaction : MonoBehaviour
 
     public GameObject curInteractionObject; // 현재 상호작용 아이템 오브젝트
     public IInteractable curInteractable; // 현재 상호작용 인터페이스
+
+    public TextMeshProUGUI promptUI;
+    private Camera camera;
+
+    private void Start()
+    {
+        camera = Camera.main;
+    }
 }
