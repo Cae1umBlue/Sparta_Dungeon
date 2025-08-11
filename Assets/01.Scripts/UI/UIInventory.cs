@@ -19,7 +19,7 @@ public class UIInventory : MonoBehaviour
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI selectedItemStatName;
-    public TextMeshProUGUI selectedItemStatvalue;
+    public TextMeshProUGUI selectedItemStatValue;
     public GameObject useButton;
     public GameObject dropButton;
 
@@ -58,7 +58,7 @@ public class UIInventory : MonoBehaviour
         selectedItemName.text = string.Empty;
         selectedItemDescription.text  = string.Empty;
         selectedItemStatName.text = string.Empty;
-        selectedItemStatvalue.text = string.Empty;
+        selectedItemStatValue.text = string.Empty;
 
         useButton.SetActive(false);
         dropButton.SetActive(false);
@@ -141,11 +141,41 @@ public class UIInventory : MonoBehaviour
 
     ItemSlot GetEmptySlot()
     {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null)
+            {
+                return slots[i];
+            }
+        }
         return null;
     }
 
-    ItemSlot ThrowItem(ItemData data)
+    public void ThrowItem(ItemData data)
     {
-        return null;
-    }    
+        Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
+    }
+    
+    public void SelectItem(int index)
+    {
+        if (slots[index].item == null) return;
+
+        selectedItem = slots[index];
+        selectedItemIndex = index;
+
+        selectedItemName.text = selectedItem.item.displayName;
+        selectedItemDescription.text = selectedItem.item.description;
+
+        selectedItemStatName.text = string.Empty;
+        selectedItemStatValue.text = string.Empty;
+
+        for(int i = 0; i < selectedItem.item.consumables.Length; i++)
+        {
+            selectedItemStatName.text += selectedItem.item.consumables[i].type.ToString();
+            selectedItemStatValue.text += selectedItem.item.consumables[i].value.ToString();
+        }
+
+        useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
+        dropButton.SetActive(true);
+    }
 }
