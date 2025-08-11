@@ -23,7 +23,7 @@ public class UIInventory : MonoBehaviour
     public GameObject useButton;
     public GameObject dropButton;
 
-    private int curEqiuipIndex;
+    //private int curEqiuipIndex;
 
     private PlayerController controller;
     private PlayerCondition condition;
