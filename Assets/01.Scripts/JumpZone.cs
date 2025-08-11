@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class JumpZone : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float jumpPower = 5f;
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+        }
     }
 }
