@@ -85,7 +85,7 @@ public class UIInventory : MonoBehaviour
     {
         ItemData data = CharacterManager.Instance.Player.itemData;
 
-        if (data.canStack)
+        if (data.canStack) // 아이템 중복 소지 가능시
         {
             ItemSlot slot = GetItemStack(data);
             if (slot != null)
@@ -96,6 +96,20 @@ public class UIInventory : MonoBehaviour
                 return;
             }
         }
+
+        ItemSlot emptySlot = GetEmptySlot(); // 빈 슬롯 찾기
+
+        if (emptySlot != null) // 빈 슬롯이 있다면
+        {
+            emptySlot.item = data;
+            emptySlot.quantity = 1;
+            UpdateUI();
+            CharacterManager.Instance.Player.itemData = null;
+            return;
+        }
+
+        ThrowItem(data); // 빈슬롯이 없다면
+        CharacterManager.Instance.Player.itemData = null;
     }
 
     ItemSlot GetItemStack(ItemData data)
