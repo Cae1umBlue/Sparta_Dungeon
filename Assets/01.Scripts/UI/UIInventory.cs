@@ -82,6 +82,19 @@ public class UIInventory : MonoBehaviour
     }
 
     void AddItem()
+    ItemSlot GetItemStack(ItemData data)
+    {
+        for(int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == data && slots[i].quantity < data.maxStackAmount)
+            {
+                return slots[i];
+            }
+        }
+        return null;
+    }
+
+    void UpdateUI()
     {
 
     }
