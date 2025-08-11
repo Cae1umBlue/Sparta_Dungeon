@@ -14,8 +14,6 @@ public class UIInventory : MonoBehaviour
     public Transform dropPosition;
 
     [Header("Selected Item")]
-    private ItemSlot selectedItem;
-    private int selectedItemIndex;
     public TextMeshProUGUI selectedItemName;
     public TextMeshProUGUI selectedItemDescription;
     public TextMeshProUGUI selectedItemStatName;
@@ -23,6 +21,8 @@ public class UIInventory : MonoBehaviour
     public GameObject useButton;
     public GameObject dropButton;
 
+    private ItemData selectedItem;
+    private int selectedItemIndex = 0;
     //private int curEqiuipIndex;
 
     private PlayerController controller;
@@ -40,12 +40,11 @@ public class UIInventory : MonoBehaviour
         inventoryWindow.SetActive(false);
         slots = new ItemSlot[slotPanel.childCount];
 
-        for(int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             slots[i] = slotPanel.GetChild(i).GetComponent<ItemSlot>();
             slots[i].index = i;
             slots[i].inventory = this;
-            slots[i].Clear();
         }
 
         ClearSelectedItemWindows();
@@ -56,7 +55,7 @@ public class UIInventory : MonoBehaviour
         selectedItem = null;
 
         selectedItemName.text = string.Empty;
-        selectedItemDescription.text  = string.Empty;
+        selectedItemDescription.text = string.Empty;
         selectedItemStatName.text = string.Empty;
         selectedItemStatValue.text = string.Empty;
 
@@ -66,7 +65,7 @@ public class UIInventory : MonoBehaviour
 
     void Toggle()
     {
-        if(IsOpen())
+        if (IsOpen())
         {
             inventoryWindow.SetActive(false);
         }
@@ -114,7 +113,7 @@ public class UIInventory : MonoBehaviour
 
     ItemSlot GetItemStack(ItemData data)
     {
-        for(int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
             if (slots[i].item == data && slots[i].quantity < data.maxStackAmount)
             {
@@ -126,9 +125,9 @@ public class UIInventory : MonoBehaviour
 
     void UpdateUI()
     {
-        for(int i = 0; i < slots.Length; i++)
+        for (int i = 0; i < slots.Length; i++)
         {
-            if(slots[i].item != null)
+            if (slots[i].item != null)
             {
                 slots[i].Set();
             }
@@ -155,63 +154,66 @@ public class UIInventory : MonoBehaviour
     {
         Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
     }
-    
+
     public void SelectItem(int index)
     {
         if (slots[index].item == null) return;
 
-        selectedItem = slots[index];
+        selectedItem = slots[index].item;
         selectedItemIndex = index;
 
-        selectedItemName.text = selectedItem.item.displayName;
-        selectedItemDescription.text = selectedItem.item.description;
+        selectedItemName.text = selectedItem.displayName;
+        selectedItemDescription.text = selectedItem.description;
 
         selectedItemStatName.text = string.Empty;
         selectedItemStatValue.text = string.Empty;
 
-        for(int i = 0; i < selectedItem.item.consumables.Length; i++)
+        for (int i = 0; i < selectedItem.consumables.Length; i++)
         {
-            selectedItemStatName.text += selectedItem.item.consumables[i].type.ToString();
-            selectedItemStatValue.text += selectedItem.item.consumables[i].value.ToString();
+            selectedItemStatName.text += selectedItem.consumables[i].type.ToString() + "\n";
+            selectedItemStatValue.text += selectedItem.consumables[i].value.ToString() + "\n";
         }
 
-        useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
+        useButton.SetActive(selectedItem.type == ItemType.Consumable);
         dropButton.SetActive(true);
     }
 
     public void OnUseButton()
     {
-        if(selectedItem.item.type == ItemType.Consumable)
+        if (selectedItem.type == ItemType.Consumable)
         {
-            for(int i = 0; i < selectedItem.item.consumables.Length; i++)
+            for (int i = 0; i < selectedItem.consumables.Length; i++)
             {
-                switch(selectedItem.item.consumables[i].type)
+                switch (selectedItem.consumables[i].type)
                 {
                     case ConsumableType.Health:
-                        condition.Heal(selectedItem.item.consumables[i].value); break;
+                        condition.Heal(selectedItem.consumables[i].value); break;
                     case ConsumableType.Stamina:
-                        condition.Heal(selectedItem.item.consumables[i].value); break;
+                        condition.Heal(selectedItem.consumables[i].value); break;
                 }
             }
             RemoveSelectedItem();
         }
     }
 
+    public void OnDropButton()
+    {
+        ThrowItem(selectedItem);
+        RemoveSelectedItem();
+    }
+
     void RemoveSelectedItem() // 선택 또는 사용한 아이템 제거
     {
-        selectedItem.quantity--;
+        slots[selectedItemIndex].quantity--;
 
-        if(selectedItem.quantity <= 0)
+        if (slots[selectedItemIndex].quantity <= 0)
         {
             selectedItem = null;
             slots[selectedItemIndex].item = null;
             selectedItemIndex = -1;
             ClearSelectedItemWindows();
         }
-    }
 
-    public bool HasItem(ItemData item, int quantity)
-    {
-        return false;
+        UpdateUI();
     }
 }
