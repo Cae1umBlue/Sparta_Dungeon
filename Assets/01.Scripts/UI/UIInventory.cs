@@ -51,7 +51,7 @@ public class UIInventory : MonoBehaviour
         ClearSelectedItemWindows();
     }
 
-    void ClearSelectedItemWindows()
+    void ClearSelectedItemWindows() // 선택한 아이템 정보창 날리기
     {
         selectedItem = null;
 
@@ -66,7 +66,19 @@ public class UIInventory : MonoBehaviour
 
     void Toggle()
     {
+        if(IsOpen())
+        {
+            inventoryWindow.SetActive(false);
+        }
+        else
+        {
+            inventoryWindow.SetActive(true);
+        }
+    }
 
+    bool IsOpen()
+    {
+        return inventoryWindow.activeInHierarchy;
     }
 
     void AddItem()
