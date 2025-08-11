@@ -9,6 +9,7 @@ public class ItemSlot : MonoBehaviour
     public ItemData item;
 
     public UIInventory inventory;
+    public Button button;
     public Image Icon;
     public TextMeshProUGUI quatityText;
     private Outline outline;

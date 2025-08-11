@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     // ========================플레이어 인벤토리============================
 
-    public void OnInventoryButton(InputAction.CallbackContext context)
+    public void OnInventoryInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
         {

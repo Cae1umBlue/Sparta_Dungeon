@@ -128,7 +128,7 @@ public class UIInventory : MonoBehaviour
     {
         for(int i = 0; i < slots.Length; i++)
         {
-            if(slots[i].item == null)
+            if(slots[i].item != null)
             {
                 slots[i].Set();
             }
@@ -208,5 +208,10 @@ public class UIInventory : MonoBehaviour
             selectedItemIndex = -1;
             ClearSelectedItemWindows();
         }
+    }
+
+    public bool HasItem(ItemData item, int quantity)
+    {
+        return false;
     }
 }
