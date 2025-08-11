@@ -14,7 +14,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
 
     Condition health { get { return uiCondition.health; } }
     //Condition hunger { get { return uiCondition.hunger; } }
-    //Condition stamina { get { return uiCondition.Stamina; } }
+    Condition stamina { get { return uiCondition.Stamina; } }
 
     //public float nohungerHealthDecay;
     public event Action onTakeDamage;

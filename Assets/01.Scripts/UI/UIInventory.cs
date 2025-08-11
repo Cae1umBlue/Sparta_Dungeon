@@ -178,4 +178,23 @@ public class UIInventory : MonoBehaviour
         useButton.SetActive(selectedItem.item.type == ItemType.Consumable);
         dropButton.SetActive(true);
     }
+
+    public void OnUseButton()
+    {
+        if(selectedItem.item.type == ItemType.Consumable)
+        {
+            for(int i = 0; i < selectedItem.item.consumables.Length; i++)
+            {
+                switch(selectedItem.item.consumables[i].type)
+                {
+                    case ConsumableType.Health:
+                        condition.Heal(selectedItem.item.consumables[i].value); break;
+                    case ConsumableType.Stamina:
+                        condition.Heal(selectedItem.item.consumables[i].value); break;
+                }
+            }
+            RemoveSelectedItem();
+        }
+    }
+
 }
