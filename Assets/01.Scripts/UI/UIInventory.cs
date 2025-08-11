@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class UIInventory : MonoBehaviour
 {
@@ -33,4 +34,35 @@ public class UIInventory : MonoBehaviour
         condition = CharacterManager.Instance.Player.condition;
         dropPosition = CharacterManager.Instance.Player.dropPosition;
 
+        controller.inventory += Toggle;
+        CharacterManager.Instance.Player.addItem += AddItem;
+
+        inventoryWindow.SetActive(false);
+        slots = new ItemSlot[slotPanel.childCount];
+
+        for(int i = 0; i < slots.Length; i++)
+        {
+            slots[i] = slotPanel.GetChild(i).GetComponent<ItemSlot>();
+            slots[i].index = i;
+            slots[i].inventory = this;
+            slots[i].Clear();
+        }
+
+        ClearSelectedItemWindows();
+    }
+
+    void ClearSelectedItemWindows()
+    {
+
+    }
+
+    void Toggle()
+    {
+
+    }
+
+    void AddItem()
+    {
+
+    }
 }
