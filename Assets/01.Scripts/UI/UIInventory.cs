@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIInventory : MonoBehaviour
 {
@@ -25,4 +26,11 @@ public class UIInventory : MonoBehaviour
 
     private PlayerController controller;
     private PlayerCondition condition;
+
+    private void Start()
+    {
+        controller = CharacterManager.Instance.Player.controller;
+        condition = CharacterManager.Instance.Player.condition;
+        dropPosition = CharacterManager.Instance.Player.dropPosition;
+
 }
