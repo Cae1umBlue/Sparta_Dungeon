@@ -126,6 +126,26 @@ public class UIInventory : MonoBehaviour
 
     void UpdateUI()
     {
-
+        for(int i = 0; i < slots.Length; i++)
+        {
+            if(slots[i].item == null)
+            {
+                slots[i].Set();
+            }
+            else
+            {
+                slots[i].Clear();
+            }
+        }
     }
+
+    ItemSlot GetEmptySlot()
+    {
+        return null;
+    }
+
+    ItemSlot ThrowItem(ItemData data)
+    {
+        return null;
+    }    
 }
