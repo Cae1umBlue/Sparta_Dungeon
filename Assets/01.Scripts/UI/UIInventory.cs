@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class UIInventory : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ItemSlot[] slots;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GameObject inventoryWindow;
+    public Transform slotPanel;
+    public Transform dropPosition;
+
+    [Header("Selected Item")]
+    private ItemSlot selectedItem;
+    private int selectedItemIndex;
+    public TextMeshProUGUI selectedItemName;
+    public TextMeshProUGUI selectedItemDescription;
+    public TextMeshProUGUI selectedItemStatName;
+    public TextMeshProUGUI selectedItemStatvalue;
+    public GameObject useButton;
+    public GameObject DropButton;
+
+    private int curEqiuipIndex;
+
+    private PlayerController controller;
+    private PlayerCondition condition;
 }
