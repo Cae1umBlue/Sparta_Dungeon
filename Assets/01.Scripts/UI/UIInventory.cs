@@ -82,6 +82,22 @@ public class UIInventory : MonoBehaviour
     }
 
     void AddItem()
+    {
+        ItemData data = CharacterManager.Instance.Player.itemData;
+
+        if (data.canStack)
+        {
+            ItemSlot slot = GetItemStack(data);
+            if (slot != null)
+            {
+                slot.quantity++;
+                UpdateUI();
+                CharacterManager.Instance.Player.itemData = null;
+                return;
+            }
+        }
+    }
+
     ItemSlot GetItemStack(ItemData data)
     {
         for(int i = 0; i < slots.Length; i++)
