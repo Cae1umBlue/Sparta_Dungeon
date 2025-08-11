@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public ItemData item;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public UIInventory inventory;
+    public Image Icon;
+    public TextMeshProUGUI quatityText;
+    private Outline outline;
+
+    public int index;
+    public int quantity;
 }
