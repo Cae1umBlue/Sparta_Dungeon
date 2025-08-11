@@ -20,4 +20,30 @@ public class Interaction : MonoBehaviour
     {
         camera = Camera.main;
     }
+
+    private void Update()
+    {
+        if(Time.time - lastCheckTime > checkRate)
+        {
+            lastCheckTime = Time.time;
+
+            Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, maxCheckDistance, layerMask))
+            {
+                if (hit.collider.gameObject != curInteractionObject)
+                {
+                    curInteractionObject = hit.collider.gameObject;
+                    curInteractable = hit.collider.GetComponent<IInteractable>();
+                    SetPromptText();
+                }
+            }
+        }
+    }
+
+    private void SetPromptText()
+    {
+
+    }
 }
