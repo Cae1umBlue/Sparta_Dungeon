@@ -308,6 +308,7 @@ GameObject:
   - component: {fileID: 122490223}
   - component: {fileID: 122490222}
   - component: {fileID: 122490221}
+  - component: {fileID: 122490224}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -454,6 +455,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: cfea43e0-7947-4133-a20a-e61770cafac2
     m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 122490224}
+        m_TargetAssemblyTypeName: Interaction, Assembly-CSharp
+        m_MethodName: OnInteractInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fd153f58-6812-4500-a3cc-7f3f8346e2f5
+    m_ActionName: Player/Interaction[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -508,6 +525,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   condition: {fileID: 0}
+  itemData: {fileID: 0}
+--- !u!114 &122490224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122490216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57cd4abc53501ff4fba538279f206c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkRate: 0.05
+  maxCheckDistance: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  curInteractionObject: {fileID: 0}
+  promptText: {fileID: 0}
 --- !u!1 &130040807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,6 +1404,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1067270163}
   m_CullTransparentMesh: 1
+--- !u!1 &1144082742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4938925957721393815, guid: 71b53e2958225f648b18c4663b261ef5, type: 3}
+  m_PrefabInstance: {fileID: 4207800248461210072}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1144082746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144082742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e89ae252a1c5054db34be0c337ba2b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 11400000, guid: b8d02e118aeec8e46aa401597cf60485, type: 2}
 --- !u!1 &1315846386
 GameObject:
   m_ObjectHideFlags: 0
@@ -1950,7 +2005,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4938925957721393815, guid: 71b53e2958225f648b18c4663b261ef5, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1144082746}
   m_SourcePrefab: {fileID: 100100000, guid: 71b53e2958225f648b18c4663b261ef5, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
