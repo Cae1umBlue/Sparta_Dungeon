@@ -23,7 +23,6 @@ public class UIInventory : MonoBehaviour
 
     private ItemData selectedItem;
     private int selectedItemIndex = 0;
-    //private int curEqiuipIndex;
 
     private PlayerController controller;
     private PlayerCondition condition;
@@ -50,7 +49,10 @@ public class UIInventory : MonoBehaviour
         ClearSelectedItemWindows();
     }
 
-    void ClearSelectedItemWindows() // 선택한 아이템 정보창 날리기
+    // ======================== 인벤토리 UI 관리 ============================
+
+
+    void ClearSelectedItemWindows() // 선택한 아이템 정보창 초기화
     {
         selectedItem = null;
 
@@ -79,6 +81,59 @@ public class UIInventory : MonoBehaviour
     {
         return inventoryWindow.activeInHierarchy;
     }
+
+    public void SelectItem(int index) // 아이템 선택 - 기능분리 필요(리팩토링 해보자)
+    {
+        if (slots[index].item == null) return;
+
+        selectedItem = slots[index].item;
+        selectedItemIndex = index;
+
+        selectedItemName.text = selectedItem.displayName;
+        selectedItemDescription.text = selectedItem.description;
+
+        selectedItemStatName.text = string.Empty;
+        selectedItemStatValue.text = string.Empty;
+
+        for (int i = 0; i < selectedItem.consumables.Length; i++)
+        {
+            selectedItemStatName.text += selectedItem.consumables[i].type.ToString() + "\n";
+            selectedItemStatValue.text += selectedItem.consumables[i].value.ToString() + "\n";
+        }
+
+        useButton.SetActive(selectedItem.type == ItemType.Consumable);
+        dropButton.SetActive(true);
+    }
+
+    ItemSlot GetItemStack(ItemData data) // 아이템 소지 수량
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == data && slots[i].quantity < data.maxStackAmount)
+            {
+                return slots[i];
+            }
+        }
+        return null;
+    }
+
+    void UpdateUI() // UI 새로고침
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null)
+            {
+                slots[i].Set();
+            }
+            else
+            {
+                slots[i].Clear();
+            }
+        }
+    }
+
+    // ======================== 인벤토리 데이터 관리 ============================
+
 
     void AddItem() // 아이템 추가
     {
@@ -111,34 +166,7 @@ public class UIInventory : MonoBehaviour
         CharacterManager.Instance.Player.itemData = null;
     }
 
-    ItemSlot GetItemStack(ItemData data)
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (slots[i].item == data && slots[i].quantity < data.maxStackAmount)
-            {
-                return slots[i];
-            }
-        }
-        return null;
-    }
-
-    void UpdateUI()
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (slots[i].item != null)
-            {
-                slots[i].Set();
-            }
-            else
-            {
-                slots[i].Clear();
-            }
-        }
-    }
-
-    ItemSlot GetEmptySlot()
+    ItemSlot GetEmptySlot() // 빈 슬롯 탐색
     {
         for (int i = 0; i < slots.Length; i++)
         {
@@ -150,35 +178,26 @@ public class UIInventory : MonoBehaviour
         return null;
     }
 
-    public void ThrowItem(ItemData data)
+    void RemoveSelectedItem() // 선택 또는 사용한 아이템 제거
     {
-        Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
-    }
+        slots[selectedItemIndex].quantity--;
 
-    public void SelectItem(int index)
-    {
-        if (slots[index].item == null) return;
-
-        selectedItem = slots[index].item;
-        selectedItemIndex = index;
-
-        selectedItemName.text = selectedItem.displayName;
-        selectedItemDescription.text = selectedItem.description;
-
-        selectedItemStatName.text = string.Empty;
-        selectedItemStatValue.text = string.Empty;
-
-        for (int i = 0; i < selectedItem.consumables.Length; i++)
+        if (slots[selectedItemIndex].quantity <= 0)
         {
-            selectedItemStatName.text += selectedItem.consumables[i].type.ToString() + "\n";
-            selectedItemStatValue.text += selectedItem.consumables[i].value.ToString() + "\n";
+            selectedItem = null;
+            slots[selectedItemIndex].item = null;
+            selectedItemIndex = -1;
+            ClearSelectedItemWindows();
         }
 
-        useButton.SetActive(selectedItem.type == ItemType.Consumable);
-        dropButton.SetActive(true);
+        UpdateUI();
     }
 
-    public void OnUseButton()
+
+    // ======================== 인벤토리 아이템 조작 기능 ============================
+
+
+    public void OnUseButton() // 아이템 사용 버튼
     {
         if (selectedItem.type == ItemType.Consumable)
         {
@@ -196,24 +215,14 @@ public class UIInventory : MonoBehaviour
         }
     }
 
-    public void OnDropButton()
+    public void OnDropButton() // 아이템 버리기 버튼
     {
         ThrowItem(selectedItem);
         RemoveSelectedItem();
     }
 
-    void RemoveSelectedItem() // 선택 또는 사용한 아이템 제거
+    public void ThrowItem(ItemData data) // 아이템 버리기
     {
-        slots[selectedItemIndex].quantity--;
-
-        if (slots[selectedItemIndex].quantity <= 0)
-        {
-            selectedItem = null;
-            slots[selectedItemIndex].item = null;
-            selectedItemIndex = -1;
-            ClearSelectedItemWindows();
-        }
-
-        UpdateUI();
+        Instantiate(data.dropPrefab, dropPosition.position, Quaternion.Euler(Vector3.one * Random.value * 360));
     }
 }
