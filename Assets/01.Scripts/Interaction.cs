@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
@@ -52,5 +53,17 @@ public class Interaction : MonoBehaviour
     {
         promptText.gameObject.SetActive(true);
         promptText.text = curInteractable.GetInteractPrompot();
+    }
+
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        // 인풋 입력의 현재 상태 체크 및 상호작용 인터페이스 여부 확인
+        if(context.phase == InputActionPhase.Started && curInteractable != null)
+        {
+            curInteractable.OnInteract();
+            curInteractionObject = null;
+            curInteractable = null;
+            promptText.gameObject.SetActive(false);
+        }
     }
 }
