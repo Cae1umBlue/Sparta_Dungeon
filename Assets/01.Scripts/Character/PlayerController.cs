@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked; // 인벤토리 On/Off 시 마우스 고정이 반대로 발생하여 설정
+    }
+
     private void FixedUpdate()
     {
         Move();
