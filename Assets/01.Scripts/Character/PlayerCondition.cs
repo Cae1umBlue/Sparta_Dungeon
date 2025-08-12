@@ -27,9 +27,16 @@ public class PlayerCondition : MonoBehaviour, IDamagable
         }
     }
 
-    public void Heal(float amount) // 체력 회복
+    public void HealStat(ConsumableType type, float amount)
     {
-        health.Add(amount);
+        if (type == ConsumableType.Health)
+        {
+            health.Add(amount);
+        }
+        else if (type == ConsumableType.Stamina)
+        {
+            stamina.Add(amount);
+        }
     }
 
     void Die() // 사망
