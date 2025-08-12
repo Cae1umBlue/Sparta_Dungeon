@@ -13,7 +13,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public UICondition uiCondition;
 
     Condition health { get { return uiCondition.health; } }
-    Condition stamina { get { return uiCondition.stamina; } } // 스테미나 소비 및 회복 기능 추가 예정
+    Condition stamina { get { return uiCondition.stamina; } }
 
     public event Action onTakeDamage;
 
@@ -42,6 +42,7 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     void Die() // 사망
     {
         Debug.Log("You Die");
+        // 사망 UI 추가하면 좋을듯
     }
 
     public void TakePhysicalDamage(int damageAmount)

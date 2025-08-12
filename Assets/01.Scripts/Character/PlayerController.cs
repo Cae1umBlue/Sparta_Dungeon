@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")] // 이동 및 점프
     public float moveSpeed;
+    private float OriginSpeed; // 기존 이동속도
     private Vector2 curMovementInput;
     public float jumpPower;
     public LayerMask groundLayerMask;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked; // 인벤토리 On/Off 시 마우스 고정이 반대로 발생하여 설정
+        OriginSpeed = moveSpeed; // 최초 이동속도 저장
     }
 
     private void FixedUpdate()
@@ -72,6 +74,18 @@ public class PlayerController : MonoBehaviour
         dir.y = rb.velocity.y;
 
         rb.velocity = dir;
+    }
+
+    public void BoostSpeed(float amount, float duration)
+    {
+        StartCoroutine(SpeedBoostCoroutine(amount, duration));
+    }
+
+    IEnumerator SpeedBoostCoroutine(float amount, float duration)
+    {
+        moveSpeed += amount;
+        yield return new WaitForSeconds(duration);
+        moveSpeed = OriginSpeed;
     }
 
     // ========================플레이어 점프============================

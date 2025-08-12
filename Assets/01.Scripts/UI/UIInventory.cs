@@ -207,14 +207,23 @@ public class UIInventory : MonoBehaviour
 
     public void OnUseButton() // 아이템 사용 버튼
     {
+        if (selectedItem == null) return;
+
         if (selectedItem.type == ItemType.Consumable)
         {
             for (int i = 0; i < selectedItem.consumables.Length; i++)
             {
+                // 체력/스태미나 회복
                 ConsumableType type = selectedItem.consumables[i].type;
                 float value = selectedItem.consumables[i].value;
 
                 condition.HealStat(type, value);
+
+                // 스피드 부스트
+                if(type == ConsumableType.Speed)
+                {
+                   controller.BoostSpeed(selectedItem.consumables[i].value, 5f);
+                }
             }
             RemoveSelectedItem();
         }
