@@ -216,7 +216,7 @@ public class UIInventory : MonoBehaviour
                     case ConsumableType.Health:
                         condition.Heal(selectedItem.consumables[i].value); break;
                     case ConsumableType.Stamina:
-                        condition.Heal(selectedItem.consumables[i].value); break;
+                        condition.Heal(selectedItem.consumables[i].value); break; // 스테미나 전용 메서드 만들어야함
                 }
             }
             RemoveSelectedItem();
