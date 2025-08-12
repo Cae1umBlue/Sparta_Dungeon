@@ -86,10 +86,6 @@ public class UIInventory : MonoBehaviour
 
     public void SelectItem(int index) // 아이템 선택 - 기능분리 필요(리팩토링 해보자)
     {
-        //Debug.Log(selectedItemIcon == null ? "IconImage is NULL" : "IconImage OK", this);
-        //Debug.Log(selectedItem == null ? "SelectedItem is NULL" : "SelectedItem OK", this);
-
-
         if (slots[index].item == null) return;
 
         selectedItem = slots[index].item;

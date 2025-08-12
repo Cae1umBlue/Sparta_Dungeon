@@ -76,12 +76,12 @@ public class PlayerController : MonoBehaviour
         rb.velocity = dir;
     }
 
-    public void BoostSpeed(float amount, float duration)
+    public void BoostSpeed(float amount, float duration) // 이동속도 증가
     {
         StartCoroutine(SpeedBoostCoroutine(amount, duration));
     }
 
-    IEnumerator SpeedBoostCoroutine(float amount, float duration)
+    IEnumerator SpeedBoostCoroutine(float amount, float duration) // 이동속도 증감 코루틴
     {
         moveSpeed += amount;
         yield return new WaitForSeconds(duration);
