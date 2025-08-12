@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 curMovementInput;
     public float jumpPower;
     public LayerMask groundLayerMask;
+    public float uesStamina;
 
     [Header("Look")] // 시야
     public Transform cameraContainer;
@@ -79,7 +80,10 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            rb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            if(CharacterManager.Instance.Player.condition.UseStamina(uesStamina))
+            {
+                rb.AddForce(Vector2.up * jumpPower, ForceMode.Impulse);
+            }
         }    
     }
 

@@ -13,12 +13,14 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     public UICondition uiCondition;
 
     Condition health { get { return uiCondition.health; } }
-    Condition stamina { get { return uiCondition.Stamina; } } // 스테미나 소비 및 회복 기능 추가 예정
+    Condition stamina { get { return uiCondition.stamina; } } // 스테미나 소비 및 회복 기능 추가 예정
 
     public event Action onTakeDamage;
 
     private void Update()
     {
+        stamina.Add(stamina.passiveValue * Time.deltaTime);
+
         if(health.curValue <= 0f) // 체력 0 이하 사망
         {
             Die();
@@ -39,5 +41,15 @@ public class PlayerCondition : MonoBehaviour, IDamagable
     {
         health.Subtract(damageAmount);
         onTakeDamage?.Invoke();
+    }
+
+    public bool UseStamina(float amount)
+    {
+        if(stamina.curValue - amount < 0)
+        {
+            return false;
+        }
+        stamina.Subtract(amount);
+        return true;
     }
 }
