@@ -211,13 +211,10 @@ public class UIInventory : MonoBehaviour
         {
             for (int i = 0; i < selectedItem.consumables.Length; i++)
             {
-                switch (selectedItem.consumables[i].type)
-                {
-                    case ConsumableType.Health:
-                        condition.Heal(selectedItem.consumables[i].value); break;
-                    case ConsumableType.Stamina:
-                        condition.Heal(selectedItem.consumables[i].value); break; // 스테미나 전용 메서드 만들어야함
-                }
+                ConsumableType type = selectedItem.consumables[i].type;
+                float value = selectedItem.consumables[i].value;
+
+                condition.HealStat(type, value);
             }
             RemoveSelectedItem();
         }

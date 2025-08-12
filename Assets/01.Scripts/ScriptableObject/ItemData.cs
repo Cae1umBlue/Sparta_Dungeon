@@ -5,14 +5,15 @@ using UnityEngine;
 
 public enum ItemType
 {
-    Consumable,
-    Equipable
+    Resource,
+    Consumable
 }
 
 public enum ConsumableType
 {
     Health,
-    Stamina
+    Stamina,
+    Speed
 }
 
 [System.Serializable]
