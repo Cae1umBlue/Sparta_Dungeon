@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class UIInventory : MonoBehaviour
 {
@@ -20,6 +19,7 @@ public class UIInventory : MonoBehaviour
     public TextMeshProUGUI selectedItemStatValue;
     public GameObject useButton;
     public GameObject dropButton;
+    public Image selectedItemIcon;
 
     private ItemData selectedItem;
     private int selectedItemIndex = 0;
@@ -63,6 +63,8 @@ public class UIInventory : MonoBehaviour
 
         useButton.SetActive(false);
         dropButton.SetActive(false);
+
+        selectedItemIcon.sprite = null; // 스프라이트가 아니라 이미지 컴포넌트 자체를 초기화 시켜서 문제가 됬다
     }
 
     void Toggle() // 인벤토리 창 on/off
@@ -84,10 +86,16 @@ public class UIInventory : MonoBehaviour
 
     public void SelectItem(int index) // 아이템 선택 - 기능분리 필요(리팩토링 해보자)
     {
+        //Debug.Log(selectedItemIcon == null ? "IconImage is NULL" : "IconImage OK", this);
+        //Debug.Log(selectedItem == null ? "SelectedItem is NULL" : "SelectedItem OK", this);
+
+
         if (slots[index].item == null) return;
 
         selectedItem = slots[index].item;
         selectedItemIndex = index;
+
+        selectedItemIcon.sprite = selectedItem.icon;
 
         selectedItemName.text = selectedItem.displayName;
         selectedItemDescription.text = selectedItem.description;
