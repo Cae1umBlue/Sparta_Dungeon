@@ -99,7 +99,6 @@ Packages/                    # 패키지 설정
   ![녹음 2025-08-13 120406](https://github.com/user-attachments/assets/cd95b98d-6bff-4b58-af97-f1799980e62f)
 
   -  데미지를 받을 경우 체력 감소
-  -  점프 시 스태미나 소모
   
 - **동적 환경 조사**
 
@@ -111,10 +110,32 @@ Packages/                    # 패키지 설정
 
   ![녹음 2025-08-13 122240](https://github.com/user-attachments/assets/38fff31f-25d2-44b8-85ba-0a9afd4a8169)
 
-  - 
-- **아이템 데이터** 
+  - JumpZone.cs 를 점프대 오브젝트에 부착
+  - OnCollisionEnter를 사용하여 플레이어와의 접촉 확인
+  - Rigidbody - AddForce - ForceMode.Impulse 를 사용하여 점프 구현
+    
+- **아이템 데이터**
+
+   <img width="571" height="640" alt="image" src="https://github.com/user-attachments/assets/a281b3d5-85f1-403c-8fd9-1da3812ab97e" />
+
+  - [CreatAssetMenu]를 이용해 ItemData.cs에서 ScriptableObject 데이터 객체를 생성
+    
 - **아이템 사용**
+
+  ![녹음 2025-08-13 124643](https://github.com/user-attachments/assets/bf1af62d-17b1-4f6b-88e4-1b2c10da1152)
+
+  - UI - Button 을 생성하여 OnClick 이벤트를 통해 아이템 사용/버리기 기능을 구현
+
 
 **도전기능**
 - **추가 UI**
+
+  ![녹음 2025-08-13 130007](https://github.com/user-attachments/assets/ee475a86-3457-4eb2-90a2-06236c581bce)
+
+  - 스태미나 UI 구현
+  - 점프 시 스태미나 감소
+    
 - **다양한 아이템 구현**
+  
+    ![녹음 2025-08-13 125047](https://github.com/user-attachments/assets/86a117bb-dae8-4155-8c6b-512c89a31d3b)
+  - Coroutine을 사용하여 이동속도 증가 후 5초 뒤에 원래 이동속도로 복귀할 수 있는 스피드 부스트 아이템 구현
