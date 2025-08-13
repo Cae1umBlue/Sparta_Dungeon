@@ -147,6 +147,13 @@ Packages/                    # 패키지 설정
     ![녹음 2025-08-13 125047](https://github.com/user-attachments/assets/86a117bb-dae8-4155-8c6b-512c89a31d3b)
   - Coroutine을 사용하여 이동속도 증가 후 5초 뒤에 원래 이동속도로 복귀할 수 있는 스피드 부스트 아이템 구현
  
-  ---
+---
 
-  트러블슈팅
+## 트러블 슈팅
+자세한 내용은 [트러블슈팅 문서](TroubleShooting.md)를 참고하세요.
+
+---
+
+## 에셋 출처
+맵 : https://assetstore.unity.com/packages/3d/environments/free-modular-3d-platformer-pack-319018
+아이템 : https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764
