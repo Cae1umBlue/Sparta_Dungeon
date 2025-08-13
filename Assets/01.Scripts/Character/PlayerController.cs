@@ -30,22 +30,15 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
-    public PlayerInput playerInput;
-    private bool isInventory = true;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         OriginSpeed = moveSpeed; // 최초 이동속도 저장
-
-        playerInput.actions.FindActionMap("Player").Enable();
-        playerInput.actions.FindActionMap("UI").Enable();
 
         EventSystem.current.sendNavigationEvents = false;
     }

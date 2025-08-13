@@ -3190,6 +3190,14 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: a2a406b6-c0dd-4786-9aa9-f73b1653ee8b
     m_ActionName: Player/Inventory[/Keyboard/tab]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 915cbb78-763e-42e4-8ec6-7c9838f01248
+    m_ActionName: UI/Point[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 05e3b7a1-bf9e-4e82-9d32-1639af450933
+    m_ActionName: UI/Click[/Mouse/leftButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
