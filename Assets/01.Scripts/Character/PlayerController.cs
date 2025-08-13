@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -29,15 +30,24 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
 
+    public PlayerInput playerInput;
+    private bool isInventory = true;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked; // 인벤토리 On/Off 시 마우스 고정이 반대로 발생하여 설정
+        Cursor.lockState = CursorLockMode.Locked;
         OriginSpeed = moveSpeed; // 최초 이동속도 저장
+
+        playerInput.actions.FindActionMap("Player").Enable();
+        playerInput.actions.FindActionMap("UI").Enable();
+
+        EventSystem.current.sendNavigationEvents = false;
     }
 
     private void FixedUpdate()
@@ -58,14 +68,14 @@ public class PlayerController : MonoBehaviour
     public void OnMoveInput(InputAction.CallbackContext context) // 이동 신호 입력
     {
         if(context.phase == InputActionPhase.Performed)
-        {
-            curMovementInput = context.ReadValue<Vector2>();
-        }
+            {
+                curMovementInput = context.ReadValue<Vector2>();
+            }
         else if(context.phase == InputActionPhase.Canceled)
-        {
-            curMovementInput = Vector2.zero;
+            {
+                curMovementInput = Vector2.zero;
+            }
         }
-    }
 
     public void Move() // 이동
     {
