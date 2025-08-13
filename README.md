@@ -155,5 +155,5 @@ Packages/                    # 패키지 설정
 ---
 
 ## 에셋 출처
-맵 : https://assetstore.unity.com/packages/3d/environments/free-modular-3d-platformer-pack-319018
-아이템 : https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764
+- 맵 : https://assetstore.unity.com/packages/3d/environments/free-modular-3d-platformer-pack-319018
+- 아이템 : https://assetstore.unity.com/packages/3d/props/simple-gems-and-items-ultimate-animated-customizable-pack-73764
